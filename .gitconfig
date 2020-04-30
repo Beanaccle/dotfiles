@@ -1,0 +1,10 @@
+[user]
+  name = Beanaccle
+  email = 25994266+Beanaccle@users.noreply.github.com
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  # 今いるブランチと master と develop 以外のマージ済みブランチを一括削除
+  cleanup = !git branch --merged | grep -vE '\\*|master$|develop$' | xargs -I % git branch -D %
