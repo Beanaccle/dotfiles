@@ -88,18 +88,22 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.cap setlocal ft=ruby fenc=utf-8
   autocmd FileType ruby,haml,slim,eruby,sass,mason setlocal ts=2 sts=2 sw=2 et
 
-  " for Node.js
-  autocmd BufNewFile,BufRead *.ejs set filetype=javascript
-
   " for markdown
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
   autocmd FileType markdown hi! def link markdownItalic LineNr
 
+  " for Node.js
+  autocmd BufNewFile,BufRead *.ejs set filetype=javascript
+
   " for Vue.js
   autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
 
+  " for React.js
+  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+
   " for Go
-  autocmd BufNewFile,BufRead *.go setlocal ts=4 sts=4 sw=4  
+  autocmd BufNewFile,BufRead *.go setlocal ts=4 sts=4 sw=4
 endif
 
 " colorscheme setting
