@@ -75,35 +75,20 @@ command -nargs=0 SetUU call SetUU()
 if has("autocmd")
   autocmd FileType * set formatoptions-=ro " 改行時にコメントしない
 
-  autocmd FileType php setlocal ts=2 sts=2 sw=2
   autocmd FileType c setlocal ts=4 sw=4 noexpandtab
-  autocmd FileType java setlocal ts=4 sts=4 sw=4
-  autocmd FileType html,xhtml,css,scss,javascript,coffee,sh,sql,yaml setlocal ts=2 sts=2 sw=2
-
-  " for Rails
-  autocmd BufNewFile,BufRead app/*/*.erb setlocal ft=eruby fenc=utf-8
-  autocmd BufNewFile,BufRead app/**/*.rb setlocal ft=ruby fenc=utf-8
-  autocmd BufNewFile,BufRead app/**/*.yml setlocal ft=ruby fenc=utf-8
-  autocmd BufNewFile,BufRead *.slim set ft=slim fenc=utf-8
-  autocmd BufNewFile,BufRead *.cap setlocal ft=ruby fenc=utf-8
-  autocmd FileType ruby,haml,slim,eruby,sass,mason setlocal ts=2 sts=2 sw=2 et
-
-  " for markdown
-  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+  autocmd FileType java,go setlocal ts=4 sts=4 sw=4
+  autocmd FileType html,xhtml,php,css,scss,javascript,js,coffee,sh,sql,yaml,yml setlocal ts=2 sts=2 sw=2
+  autocmd FileType ruby,haml,slim,eruby,sass setlocal ts=2 sts=2 sw=2 et
   autocmd FileType markdown hi! def link markdownItalic LineNr
 
-  " for Node.js
-  autocmd BufNewFile,BufRead *.ejs set filetype=javascript
-
-  " for Vue.js
-  autocmd BufNewFile,BufRead *.{html,htm,vue*} set filetype=html
-
-  " for React.js
-  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript
-
-  " for Go
-  autocmd BufNewFile,BufRead *.go setlocal ts=4 sts=4 sw=4
+  autocmd BufNewFile,BufRead app/**/*.rb  setlocal ft=ruby fenc=utf-8
+  autocmd BufNewFile,BufRead app/**/*.yml setlocal ft=ruby fenc=utf-8
+  autocmd BufNewFile,BufRead app/**/*.erb setlocal ft=eruby fenc=utf-8
+  autocmd BufNewFile,BufRead *.slim set ft=slim fenc=utf-8
+  autocmd BufNewFile,BufRead *.{html,htm,vue*} set ft=html
+  autocmd BufNewFile,BufRead *.{js,jsx,ejs} set ft=javascript
+  autocmd BufNewFile,BufRead *.{ts,tsx} set ft=typescript
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set ft=markdown
 endif
 
 " colorscheme setting
