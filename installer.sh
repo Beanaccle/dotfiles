@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-DOTPATH=~/local/dotfiles
+DOTPATH=~/local/Beanaccle/dotfiles
 
 for f in .??*
 do
