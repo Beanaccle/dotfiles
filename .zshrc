@@ -5,3 +5,5 @@ prompt pure
 
 alias be='bundle exec'
 alias fig='docker-compose'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

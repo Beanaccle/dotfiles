@@ -21,7 +21,12 @@ if dein#load_state('~/.cache/dein')
   call dein#add('scrooloose/nerdtree')
   call dein#add('tpope/vim-endwise')
   call dein#add('w0rp/ale')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
   "
+  call dein#add('posva/vim-vue')
   call dein#add('pangloss/vim-javascript')
   call dein#add('slim-template/vim-slim')
 
@@ -80,6 +85,7 @@ if has("autocmd")
   autocmd FileType html,xhtml,php,css,scss,javascript,js,coffee,sh,sql,yaml,yml setlocal ts=2 sts=2 sw=2
   autocmd FileType ruby,haml,slim,eruby,sass setlocal ts=2 sts=2 sw=2 et
   autocmd FileType markdown hi! def link markdownItalic LineNr
+  autocmd FileType vue syntax sync fromstart
 
   autocmd BufNewFile,BufRead app/**/*.rb  setlocal ft=ruby fenc=utf-8
   autocmd BufNewFile,BufRead app/**/*.yml setlocal ft=ruby fenc=utf-8
@@ -89,6 +95,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.{js,jsx,ejs} set ft=javascript
   autocmd BufNewFile,BufRead *.{ts,tsx} set ft=typescript
   autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set ft=markdown
+  autocmd BufNewFile,BufRead *.{json,jb} set filetype=json
 endif
 
 " colorscheme setting
