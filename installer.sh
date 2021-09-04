@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+set -eux
+
 DOTPATH=~/local/Beanaccle/dotfiles
 
 for f in .??*
