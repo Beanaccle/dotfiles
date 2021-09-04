@@ -1,6 +1,13 @@
 [user]
   name = Beanaccle
   email = 25994266+Beanaccle@users.noreply.github.com
+  signingkey = 9DB3897B39953969
+[gpg]
+  program = gpg
+[commit]
+  gpgsign = true
+[pull]
+  rebase = false
 [alias]
   co = checkout
   br = branch
@@ -11,5 +18,3 @@
   lg = log --oneline
   # 今いるブランチと master と develop 以外のマージ済みブランチを一括削除
   cleanup = !git branch --merged | grep -vE '\\*|master$|develop$' | xargs -I % git branch -D %
-[pull]
-  rebase = false
