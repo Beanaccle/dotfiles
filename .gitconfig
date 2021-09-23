@@ -2,8 +2,8 @@
   name = Beanaccle
   email = 25994266+Beanaccle@users.noreply.github.com
   signingkey = 9DB3897B39953969
-[gpg]
-  program = gpg
+[init]
+  defaultBranch = main
 [commit]
   gpgsign = true
 [pull]

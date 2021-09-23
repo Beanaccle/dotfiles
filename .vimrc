@@ -126,12 +126,14 @@ let g:ale_sign_column_always = 1
 let g:ale_linters = { 'html': [] }
 
 " The-NERD-tree
-let NERDTreeShowHidden = 1
-nnoremap :tree :NERDTreeToggle
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+if $TERM_PROGRAM != 'vscode'
+  let NERDTreeShowHidden = 1
+  nnoremap :tree :NERDTreeToggle
+  autocmd vimenter * NERDTree
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+endif
 
 " 自動的に quickfix-window を開く
 autocmd QuickFixCmdPost *grep* cwindow
