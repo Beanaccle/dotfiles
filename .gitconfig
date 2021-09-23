@@ -14,7 +14,5 @@
   ci = commit
   ca = commit --amend --no-edit
   st = status
-  gr = grep
   lg = log --oneline
-  # 今いるブランチと master と develop 以外のマージ済みブランチを一括削除
-  cleanup = !git branch --merged | grep -vE '\\*|master$|develop$' | xargs -I % git branch -D %
+  cleanup = !git branch --merged | grep -vE '\\*|master$|main$|develop$' | xargs -I % git branch -D %
