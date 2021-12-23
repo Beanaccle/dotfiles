@@ -1,149 +1,48 @@
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible
-endif
+syntax enable                      " シンタックスハイライトを有効にする
 
-" Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+set number                         " 行番号を表示する
+set list                           " 不可視文字を表示する
+set listchars   =tab:>-,trail:-    " タブと行末のスペースを表示する
+set laststatus  =2                 " ステータス行を表示する
+set display     =lastline          " 長い行を省略せずに表示する
+set showmode                       " モードを表示する
 
-" Required:
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
+set expandtab                      " タブを半角スペースにする
+set tabstop     =2                 " タブ幅
+set shiftwidth  =2                 " オートインデント時のインデント幅
+set autoindent                     " インデントをキープする
+set backspace   =indent,eol,start  " バックスペースの挙動を変更する
+set splitright                     " 新しいウィンドウを右に開く
+set ttyfast                        " スクロールする時などのスピードが上がる?
+set virtualedit =block             " 矩形選択で文字が無くても選択できる
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.cache/dein')
+set incsearch                      " インクリメンタル検索する
+set ignorecase                     " 検索で大文字と小文字を区別しない
+set smartcase                      " 大文字を含んで検索した場合は区別する
+set hlsearch                       " 検索ワードをハイライトする
+set wrapscan                       " 検索ワードをループする
 
-  " Add or remove your plugins here:
-  call dein#add('altercation/vim-colors-solarized')
-  call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('tpope/vim-endwise')
-  call dein#add('w0rp/ale')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-  call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-  "
-  call dein#add('posva/vim-vue')
-  call dein#add('pangloss/vim-javascript')
-  call dein#add('slim-template/vim-slim')
+set nobackup                       " バックアップファイルを作らない
+set noswapfile                     " スワップファイルを作らない
+set hidden                         " 編集中でも別ファイルを開ける
 
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+augroup vimrc
+  autocmd FileType * set formatoptions-=ro
+  autocmd BufNewFile,BufRead *.py setlocal tabstop=4 shiftwidth=4
+augroup END
 
-" Required:
-filetype plugin indent on
-syntax enable
+call plug#begin('~/.vim/plugged')
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'scrooloose/nerdtree' " ファイルツリー
+call plug#end()
 
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-"End dein Scripts-------------------------
-
-set backspace=indent,eol,start
-set encoding=utf-8
-set fileformats=unix,dos,mac
-set nobackup
-set noswapfile
-set hidden
-set number
-set ruler
-set list
-set listchars=tab:>-,trail:-
-set showmatch
-set nowrap
-set autoindent
-set smartindent
-set expandtab
-set smarttab
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set scrolloff=5
-set smartcase
-set incsearch
-set hlsearch
-
-" convert file encode
-function SetUU()
-  set ff=unix
-  set fenc=utf8
-endfunction
-command -nargs=0 SetUU call SetUU()
-
-" filetype setting
-if has("autocmd")
-  autocmd FileType * set formatoptions-=ro " 改行時にコメントしない
-
-  autocmd FileType c setlocal ts=4 sw=4 noexpandtab
-  autocmd FileType java,go setlocal ts=4 sts=4 sw=4
-  autocmd FileType html,xhtml,php,css,scss,javascript,js,coffee,sh,sql,yaml,yml setlocal ts=2 sts=2 sw=2
-  autocmd FileType ruby,haml,slim,eruby,sass setlocal ts=2 sts=2 sw=2 et
-  autocmd FileType markdown hi! def link markdownItalic LineNr
-  autocmd FileType vue syntax sync fromstart
-
-  autocmd BufNewFile,BufRead app/**/*.rb  setlocal ft=ruby fenc=utf-8
-  autocmd BufNewFile,BufRead app/**/*.yml setlocal ft=ruby fenc=utf-8
-  autocmd BufNewFile,BufRead app/**/*.erb setlocal ft=eruby fenc=utf-8
-  autocmd BufNewFile,BufRead *.slim set ft=slim fenc=utf-8
-  autocmd BufNewFile,BufRead *.{html,htm,vue*} set ft=html
-  autocmd BufNewFile,BufRead *.{js,jsx,ejs} set ft=javascript
-  autocmd BufNewFile,BufRead *.{ts,tsx} set ft=typescript
-  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set ft=markdown
-  autocmd BufNewFile,BufRead *.{json,jb} set filetype=json
-endif
-
-" colorscheme setting
-colorscheme solarized
-set background=dark
-let g:solarized_termcolors=256
-
-" status line setting
-let g:lightline = {
-  \ 'colorscheme' : 'solarized' ,
-  \ 'active': {
-    \ 'left': [ ['mode', 'paste'], ['fugitive', 'filename'] ]
-  \ },
-  \ 'component_function': {
-  \   'modified': 'MyModified',
-  \   'fugitive': 'LightLineFugitive'
-  \ }
-  \ }
-function! MyModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-function! LightLineFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-" ALE
-let g:ale_sign_column_always = 1
-let g:ale_linters = { 'html': [] }
-
-" The-NERD-tree
 if $TERM_PROGRAM != 'vscode'
+  set background=dark
+  colorscheme solarized
+  let g:solarized_termcolors=256
   let NERDTreeShowHidden = 1
-  nnoremap :tree :NERDTreeToggle
-  autocmd vimenter * NERDTree
   autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  autocmd VimEnter * NERDTree | if argc() > 0 || exists('s:std_in') | wincmd p | endif
+  autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 endif
 
-" 自動的に quickfix-window を開く
-autocmd QuickFixCmdPost *grep* cwindow
-
-" 括弧の補完
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap [<Enter> []<Left><CR><ESC><S-o>
-inoremap (<Enter> ()<Left><CR><ESC><S-o>
-
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
-inoremap <C-a> <C-o>^
-inoremap <C-e> <C-o>$
